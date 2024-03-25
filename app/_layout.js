@@ -4,8 +4,9 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { CardProvider } from '../context/CardContext';
 
-import { useColorScheme } from '@/components/useColorScheme';
+
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -41,18 +42,27 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+  <CardProvider>
+  <RootLayoutNav />
+  </CardProvider>)
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+   
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="index" options={{headerShown : false}}  />
+        <Stack.Screen name="modal" options={{ presentation: 'modal' , title : "Add Card" , headerStyle : {
+          backgroundColor : '#1a1a1a'
+        } , headerTintColor : 'white' , headerTitleStyle : {
+          fontWeight : 'bold'
+        } }}  />
+        <Stack.Screen name="settings" options={{title : "Settings" , headerShown : false}}  />
+        <Stack.Screen name="savedCardModal" options={{ presentation: 'modal' ,headerShown : false}}  />
       </Stack>
-    </ThemeProvider>
+    
   );
 }
