@@ -1,10 +1,12 @@
 
 # dWallet
-
+<img width="200" alt="Screenshot 2023-12-15 at 02 39 10" src="https://github.com/oguzzhanturkmen/dWallet/assets/111460897/f28114b5-5c5c-4bdd-ab67-2850d2339738">
+<img width="200" alt="Screenshot 2023-12-15 at 02 39 29" src="https://github.com/oguzzhanturkmen/dWallet/assets/111460897/0934308d-ecdb-4aae-9949-1f6f105d4bbc">
 <img width="200" alt="Screenshot 2023-12-15 at 02 38 42" src="https://github.com/oguzzhanturkmen/dWallet/assets/111460897/eb7f4c8a-eee1-44fe-ae70-f51c7a138cfc">
 <img width="200" alt="Screenshot 2023-12-15 at 02 38 55" src="https://github.com/oguzzhanturkmen/dWallet/assets/111460897/e911d487-a257-4ec2-a1d0-7b71f07038af">
-<img width="200" alt="Screenshot 2023-12-15 at 02 39 29" src="https://github.com/oguzzhanturkmen/dWallet/assets/111460897/0934308d-ecdb-4aae-9949-1f6f105d4bbc">
-<img width="200" alt="Screenshot 2023-12-15 at 02 39 10" src="https://github.com/oguzzhanturkmen/dWallet/assets/111460897/7032f958-286e-4a8f-b31e-c3036a5b84c">
+
+
+
 
 
 dWallet is a sleek and secure mobile application developed using React Native, designed for managing and storing credit card information. With dWallet, users can effortlessly add, view, edit, and remove their credit cards in a secure (no internet connection) local storage environment. Featuring a beautifully crafted UI, dWallet makes credit card management a seamless and visually appealing experience.
