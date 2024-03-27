@@ -41,11 +41,15 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       <SafeAreaView style ={{backgroundColor : 'black'}}>
-        <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'center' , paddingBottom : 10 ,paddingHorizontal : 20 , paddingTop : 20, backgroundColor : 'black'}}>
-        <View>
+        <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'center' , paddingBottom : 2 ,paddingHorizontal : 20 , paddingTop : 20, backgroundColor : 'black' ,}}>
+        <View style={{width : width * 0.16}}>
+          {cards.length > 0 ? (
           <TouchableOpacity onPress={handleEditButtonPress} >
-          <Text style={{color : 'white'}}>Edit Card</Text>
+            {isPressedOnEditButton ? (
+          <Text style={{color : 'white'}}>Done</Text>
+            ) : (<Text style={{color : 'white'}}>Edit Card</Text>)}
           </TouchableOpacity>
+          ) : null}
         </View>
         <View>
           <Text style={{color : 'white' , fontWeight : 'bold' , fontSize : 20}}>Credit Cards</Text>
@@ -56,20 +60,29 @@ export default function TabOneScreen() {
         </View>
       </SafeAreaView>
       {cards.length > 0 ? (
-        <ScrollView>
+        <ScrollView style={{paddingTop : 12}}>
           <View style={{flexDirection : 'column' , gap : height * -0.1 , backgroundColor : null }}>
           {cards.map((card, index) => (
             <TouchableOpacity style={styles.containerShadow} onPress={() => handleCardPress(card.cardId)}
             >
               {isPressedOnEditButton ? (
-                <TouchableOpacity onPress={() => removeCard(card.cardId)} style={{backgroundColor : 'white' , justifyContent : 'center', width : 40 , height : 40 , position : 'absolute' , top : 2 , right: 2 , zIndex : 20 , backgroundColor : 'red' , borderRadius : 40  }} >
-              <View style={{backgroundColor : 'white' , justifyContent : 'center', width : 40 , height : 40 , position : 'absolute' , top : 2 , right: 2 , zIndex : 20 , backgroundColor : 'red' , borderRadius : 40  }}>
+                <View style={{flexDirection : 'row' , gap : 10 , position : 'absolute',  top : -13 , right: 2 , zIndex : 20 }}>
+                <TouchableOpacity onPress={() => removeCard(card.cardId)} style={{backgroundColor : 'white' , justifyContent : 'center', width : 30 , height : 30 , position : 'absolute' , top : 2 , right: 2 , zIndex : 20 , backgroundColor : 'red' , borderRadius : 100  }} >
+              <View style={{  }}>
                 <Text style={{color : 'white' , fontSize : 20 , fontWeight : 'bold' , textAlign : 'center' , alignSelf : 'center' , }}>X</Text>
               </View>
-              </TouchableOpacity>) : null}
+              </TouchableOpacity>
+              <TouchableOpacity style={{backgroundColor : 'white' , justifyContent : 'center', width : 30 , height : 30 , position : 'absolute' , top : 2 , right: 40 , zIndex : 20 , backgroundColor : '#b6c2d6' , borderRadius : 100  }} >
+              <View style={{ justifyContent : 'center'  }}>
+                <Text style={{color : 'white' , fontSize : 14 , fontWeight : 'bold' , textAlign : 'center' , alignSelf : 'center' , }}>...</Text>
+                </View>
+              </TouchableOpacity>
+              </View>
+              ) : null}
             <CreditCard key={index} cardDetails={card} />
             
             </TouchableOpacity>
+            
           ))}
           </View>
         </ScrollView>

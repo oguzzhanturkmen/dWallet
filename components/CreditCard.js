@@ -6,17 +6,36 @@ import { Image } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 const CreditCard = ({ cardDetails }) => {
+  const getCardImage = () => {
+    switch (cardDetails.cardType) {
+      case 'Visa':
+        console.log('Visa')
+        return require('../assets/images/visa.png');
+      case 'Mastercard':
+        return require('../assets/images/mastercard.png');
+      // Add cases for other card types as needed
+      default:
+        console.log('Default')
+        console.log(cardDetails.cardType)
+        return null;
+    }
+  };
+  
   return (
    
       
     <View style={[styles.cardDisplayContainer, { backgroundColor: cardDetails.cardColor || "#874e2d" }]}>
-    <View style={{width: width * 0.6 , height: width * 0.6, justifyContent: 'center', alignItems: 'center', overflow: 'hidden', backgroundColor : 'white', position : 'absolute' , opacity : 0.1 , borderRadius : width , right : width * -0.3 , top : 0, shadowColor :'black' , shadowOffset : 10 , shadowRadius : 20}}/>
+    <View style={{width: width * 0.6 , height: width * 0.6, justifyContent: 'center', alignItems: 'center', overflow: 'hidden', backgroundColor : 'white', position : 'absolute' , opacity : 0.1 , borderRadius : width , right : width * -0.3 , top : 0, shadowColor :'black' , shadowOffset : 10 , shadowRadius : 20 ,}}/>
       
         <View style={styles.cardLayout}>
-          <View>
+          <View >
+            <View style={{flexDirection : 'row', justifyContent : 'space-between' , alignItems : 'center'  , width : '100%' , paddingBottom : 10 }}>
+              
       <Text style={styles.cardName}>
         {cardDetails.cardName || 'CARD NAME'}
       </Text>
+      <Image source={getCardImage(cardDetails.cardType)} style={{width: width * 0.1, height: height * 0.035, resizeMode: 'contain'}}/>
+      </View>
       <Text style={styles.cardNumber}>
         {'﹡﹡﹡﹡  ﹡﹡﹡﹡  ﹡﹡﹡﹡ ' + cardDetails.cardNumber.slice(-4)}
       </Text>
@@ -38,6 +57,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: '#000',
+    
     
 
   },
@@ -82,7 +102,7 @@ const styles = StyleSheet.create({
     color : 'white',
     fontSize : width * 0.05,
     fontWeight : 'bold',
-    marginBottom : 10
+    
   },
   cardDetails:{
     color : 'white',

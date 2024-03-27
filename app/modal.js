@@ -23,6 +23,7 @@ const Settings = () => {
     expiryDate: '',
     cvv: '',
     cardColor: 'gray', 
+    cardType: '',
   });
   const { addCard } = useCards();
   const handleUpdate = (key, value) => {
@@ -45,9 +46,27 @@ const Settings = () => {
       [key]: formattedValue,
     });
   };
+  function getCardType(cardNumber) {
+    if (/^4/.test(cardNumber)) {
+        return "Visa";
+    } else if (/^5/.test(cardNumber)) {
+        return "Mastercard";
+    } else if (/^3[47]/.test(cardNumber)) {
+        return "American Express";
+    } else if (/^6(?:011|5[0-9]{2}|4[4-9][0-9]|22(?:1(?:2[6-9]|[3-9][0-9])|[2-8][0-9]{2}|9(?:[01][0-9]|2[0-5])))/.test(cardNumber)) {
+        return "Discover";
+    } else if (/^(30[0-5]|36|38)/.test(cardNumber)) {
+        return "Diners Club";
+    } else if (/^35(?:2[89]|[3-8][0-9])/.test(cardNumber)) {
+        return "JCB";
+    } else {
+        return "Unknown";
+    }
+}
 
   const saveCardDetails = async () => {
     try {
+      cardDetails.cardType = getCardType(cardDetails.cardNumber);
       await addCard(cardDetails);
       router.dismiss();
     } catch (error) {
