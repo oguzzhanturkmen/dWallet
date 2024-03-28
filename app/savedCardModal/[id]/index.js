@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Image } from 'react-native';
 import { Platform } from 'react-native';
 import {  router } from 'expo-router'
-import { useCards } from '../../context/CardContext';
+import { useCards } from '../../../context/CardContext';
 import { useLocalSearchParams } from 'expo-router';
 import { ClipboardIcon } from 'react-native-heroicons/outline';
 import * as Clipboard from 'expo-clipboard';
@@ -24,6 +24,21 @@ const SavedCardModal = () => {
   
   const { cardId } = useLocalSearchParams();
   const { cards } = useCards();
+
+  const getCardImage = () => {
+    switch (card.cardType) {
+      case 'Visa':
+        console.log('Visa')
+        return require('../../../assets/images/visa.png');
+      case 'Mastercard':
+        return require('../../../assets/images/mastercard.png');
+      // Add cases for other card types as needed
+      default:
+        console.log('Default')
+        console.log(card.cardType)
+        return null;
+    }
+  };
   
  const card = cards.find((card) => card.cardId === cardId) || {};
 
@@ -41,10 +56,14 @@ const SavedCardModal = () => {
         <View >
           
           <View style={styles.cardLayout}>
-        <Text style={styles.cardName}>
-          {card.cardName || 'CARD NAME'}
-        </Text>
-        <Image source={require('../../assets/images/chip.png')} style={{width: width * 0.1, height: height * 0.1, resizeMode: 'contain'}}/>
+        <View style={{flexDirection : 'row', justifyContent : 'space-between' , alignItems : 'center'  , width : '100%' , paddingBottom : 10 }}>
+              
+      <Text style={styles.cardName}>
+        {card.cardName || 'CARD NAME'}
+      </Text>
+      <Image source={getCardImage(card.cardType)} style={{width: width * 0.1, height: height * 0.035, resizeMode: 'contain'}}/>
+      </View>
+        <Image source={require('../../../assets/images/chip.png')} style={{width: width * 0.1, height: height * 0.1, resizeMode: 'contain'}}/>
         <View style={{flexDirection : 'column'}}>
           <View style={{flexDirection : 'row', justifyContent : 'flex-end' , alignItems : 'center' , gap : 5}}>
         <Text style={styles.expirationDateTitle}>
@@ -221,7 +240,7 @@ const styles = StyleSheet.create({
   cardDetails:{
     color : 'white',
     fontSize : width * 0.04,
-    fontWeight : 500
+    fontWeight : '500'
   },
   expirationDateTitle: {
     fontSize: 10,

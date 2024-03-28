@@ -13,11 +13,6 @@ export default function HomeLayout() {
   }}
   
   >
-    <Stack.Screen name="savedCardModal/[id]" screenOptions={
-        {
-            headerShown: false,
-        }
-    } />
 
 
     </Stack>)
