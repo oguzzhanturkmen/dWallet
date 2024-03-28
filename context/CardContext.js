@@ -30,10 +30,23 @@ export const CardProvider = ({ children }) => {
     setCards(updatedCards);
   };
 
+  const updateCard = async (cardId, updatedCardInfo) => {
+    const updatedCards = cards.map(card => {
+      if (card.cardId === cardId) {
+        return { ...card, ...updatedCardInfo };
+      }
+      return card;
+    });
+
+    await AsyncStorage.setItem(CARD_STORAGE_KEY, JSON.stringify(updatedCards));
+    setCards(updatedCards);
+  };
+
   const value = {
     cards,
     addCard,
-    removeCard, // Add the removeCard function to the context value
+    removeCard,
+    updateCard, 
   };
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

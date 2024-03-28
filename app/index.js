@@ -35,6 +35,17 @@ export default function TabOneScreen() {
       setIsPressedOnEditButton(!isPressedOnEditButton);
       console.log(isPressedOnEditButton)
     }
+
+    const handleCardEditPress = (cardId) => {
+      console.log('Card Edit Pressed');
+      console.log(cardId)
+      router.push({
+        pathname: `savedCardModal/${cardId}/editModal` ,
+        params: {
+          cardId: cardId,
+          
+        }
+     })}
     
   
   
@@ -62,7 +73,8 @@ export default function TabOneScreen() {
       {cards.length > 0 ? (
         <ScrollView style={{paddingTop : 12}}>
           <View style={{flexDirection : 'column' , gap : height * -0.1 , backgroundColor : null }}>
-          {cards.map((card, index) => (
+          {cards.map((card, cardId)  => (
+            
             <TouchableOpacity style={styles.containerShadow} onPress={() => handleCardPress(card.cardId)}
             >
               {isPressedOnEditButton ? (
@@ -72,14 +84,14 @@ export default function TabOneScreen() {
                 <Text style={{color : 'white' , fontSize : 20 , fontWeight : 'bold' , textAlign : 'center' , alignSelf : 'center' , }}>X</Text>
               </View>
               </TouchableOpacity>
-              <TouchableOpacity style={{backgroundColor : 'white' , justifyContent : 'center', width : 30 , height : 30 , position : 'absolute' , top : 2 , right: 40 , zIndex : 20 , backgroundColor : '#b6c2d6' , borderRadius : 100  }} >
+              <TouchableOpacity style={{backgroundColor : 'white' , justifyContent : 'center', width : 30 , height : 30 , position : 'absolute' , top : 2 , right: 40 , zIndex : 20 , backgroundColor : '#b6c2d6' , borderRadius : 100  }} onPress={() => handleCardEditPress(card.cardId)} >
               <View style={{ justifyContent : 'center'  }}>
                 <Text style={{color : 'white' , fontSize : 14 , fontWeight : 'bold' , textAlign : 'center' , alignSelf : 'center' , }}>...</Text>
                 </View>
               </TouchableOpacity>
               </View>
               ) : null}
-            <CreditCard key={index} cardDetails={card} />
+            <CreditCard key={cardId} cardDetails={card} />
             
             </TouchableOpacity>
             
